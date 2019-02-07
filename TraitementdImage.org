@@ -131,3 +131,24 @@ img2.show()
 img2.save("pommeMystereVraiNiveauDeGris.jpg")
 
 #+end_src
+
+
+* Effet miroir 
+
+
+#+begin_src python  :tangle pommegrise.py
+from PIL import Image
+img = Image.open("pomme.jpg")
+largeur_image,hauteur_image=img.size
+img2 = Image.new("L",(largeur_image,hauteur_image))
+
+for y in range(hauteur_image):
+    for x in range(largeur_image):
+        rouge,vert,bleu=img.getpixel((x,y))
+        niveau_gris=int((vert+bleu+rouge)/3)
+        img2.putpixel((largeur_image-1-x,y),(niveau_gris))
+
+img2.show()
+img2.save("pommeMystere.jpg")
+
+#+end_src
